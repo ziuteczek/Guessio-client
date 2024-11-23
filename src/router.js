@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Join from "./pages/Join";
-import Lobby from "./pages/Lobby";
+import Play from "./pages/Play";
 
 const router = createBrowserRouter([
   {
@@ -10,12 +10,12 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/lobby",
-    element: <Lobby />,
-  },
-  {
     path: "/join",
     element: <Join />,
+  },
+  {
+    path: "/play",
+    element: <Play />,
   },
   {
     path: "*",
