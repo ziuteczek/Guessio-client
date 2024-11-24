@@ -35,12 +35,10 @@ const updateBoard = async (e, send, ctx) => {
   };
 
   send(JSON.stringify(boardDataObj));
-  
 };
 
 function Board({ send }) {
-  let mouseDown = false;
-
+  const mouseDownRef = useRef(false);
   const boardRef = useRef();
   const ctxRef = useRef();
 
@@ -55,10 +53,12 @@ function Board({ send }) {
       className="game__screen"
       onMouseDown={(e) => {
         handleMouseDown(e, ctxRef.current);
-        mouseDown = true;
+        mouseDownRef.current = true;
       }}
-      onMouseUp={() => (mouseDown = false)}
-      onMouseMove={(e) => mouseDown && updateBoard(e, send, ctxRef.current)}
+      onMouseUp={() => (mouseDownRef.current = false)}
+      onMouseMove={(e) =>
+        mouseDownRef.current && updateBoard(e, send, ctxRef.current)
+      }
       ref={boardRef}
     ></canvas>
   );

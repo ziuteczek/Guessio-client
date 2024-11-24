@@ -21,12 +21,11 @@ function Play() {
   );
 
   useEffect(() => {
-    if (lastMessage === undefined) {
+    if (!lastMessage) {
       return;
     }
+    console.log(lastMessage.data);
   }, [lastMessage]);
-
-  let mouseDown = false;
 
   // useEffect(() => {
   //   if (lastMessage === null) {
