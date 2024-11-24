@@ -20,6 +20,12 @@ function Play() {
     `http://localhost:4000/enter-game?userid=${2137}&code=${123456}`
   );
 
+  useEffect(() => {
+    if (lastMessage === undefined) {
+      return;
+    }
+  }, [lastMessage]);
+
   let mouseDown = false;
 
   // useEffect(() => {
