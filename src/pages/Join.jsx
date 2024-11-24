@@ -9,11 +9,12 @@ function Join() {
   const [code, setCode] = useState("");
   const navigate = useNavigate();
 
-
   const startBtnHandle = async (e) => {
     e.preventDefault();
 
-    const { userID, status } = await createUser();
+
+
+    const { userID, status } = await createUser(nick,code);
 
     if (status !== "succes" || !userID) {
       return;
@@ -42,6 +43,7 @@ function Join() {
           id="code"
           value={code}
           onChange={(e) => setCode(e.target.value)}
+          disabled
         />
 
         <button onClick={(e) => startBtnHandle(e)}>Play</button>

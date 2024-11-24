@@ -1,10 +1,10 @@
 // Creates user in existing game
 const createUser = async (nick, code) => {
   try {
-    const nameComputed = nick.trim().replaceAll(" ", "+");
+    const nickComputed = nick.trim().replaceAll(" ", "+");
 
     const response = await fetch(
-      `http://localhost:4000/create-user?nick=${nameComputed}&code=${code}`,
+      `http://localhost:4000/create-user?nick=${nickComputed}&code=${code}`,
       {
         method: "POST",
       }

@@ -1,14 +1,24 @@
 import { Link } from "react-router-dom";
+import createGame from "../api/createGame";
 
 function LinkBtn({ text, link, create }) {
-  const createGameStorage = () =>
-    localStorage.setItem("user", JSON.stringify({ create: true }));
+  const createAdmin = async () => {
+    const { userID, status, code } = await createGame();
+
+    if (status !== "succes" || !userID) {
+      return;
+    }
+
+    localStorage.setItem("user", JSON.stringify({ userID, code }));
+    console.log(userID);
+    console.log(code);
+  };
 
   return (
     <Link
       to={link}
       className="play-btns__btn"
-      onClick={create && createGameStorage()}
+      onClick={() => create && createAdmin()}
     >
       {text}
       <div className="play-btns__btn-bg"></div>
