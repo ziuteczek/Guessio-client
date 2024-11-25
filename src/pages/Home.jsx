@@ -10,8 +10,6 @@ function LinkBtn({ text, link, create }) {
     }
 
     localStorage.setItem("user", JSON.stringify({ userID, code }));
-    console.log(userID);
-    console.log(code);
   };
 
   return (

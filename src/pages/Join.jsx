@@ -24,7 +24,7 @@ function Join() {
 
   return (
     <div className="join-form__container">
-      <form className="join-form">
+      <form className="join-form" autoComplete="off">
         <label htmlFor="nick">nick</label>
         <input
           type="text"

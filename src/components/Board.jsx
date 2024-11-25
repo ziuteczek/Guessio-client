@@ -29,7 +29,7 @@ const updateBoard = async (e, send, ctx) => {
   const boardBlob = await getBoardBlob(board);
 
   const boardDataObj = {
-    type: "board update",
+    type: "update",
     time: new Date().getTime(),
     boardBlob: await boardBlob.text(),
   };
