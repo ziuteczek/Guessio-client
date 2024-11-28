@@ -15,6 +15,8 @@ function Join() {
     const { userID, status } = await createUser(nick, code);
 
     if (status !== "succes" || !userID) {
+      
+      console.log("creating user failed");
       return;
     }
 

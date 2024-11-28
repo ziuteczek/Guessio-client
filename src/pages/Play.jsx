@@ -32,6 +32,10 @@ function Play() {
     switch (update.type) {
       case "update":
         setPlayers(update.players);
+        const blob = new Blob([update.board], { type: "image/jpeg" });
+        document.body.style.backgroundImage = `URL(${URL.createObjectURL(
+          blob
+        )})`;
         break;
       default:
         console.log("vamos a la plaja");
@@ -51,8 +55,8 @@ function Play() {
   return (
     <div className="game">
       <div className="game__players">
-        {players.map((player) => (
-          <Player points={player.points} nick={player.nick} />
+        {players.map((player, i) => (
+          <Player points={player.points} nick={player.nick} key={i} />
         ))}
       </div>
       <Board send={sendMessage} />
