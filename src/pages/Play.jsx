@@ -3,22 +3,17 @@ import { deserialize } from "bson";
 
 import useWebSocket from "react-use-websocket";
 import Board from "../components/Board";
+import PlayersList from "../components/PlayersList";
 
 const Buffer = require("buffer/").Buffer;
 
 export default Play;
-function Player({ nick, points, avatarPath }) {
-  return (
-    <div className="player">
-      <p className="player__name">{nick}</p>
-      <p className="player__score">{points} pkt.</p>
-      <img className="player__avatar" alt="" src={avatarPath} />
-    </div>
-  );
-}
 function Play() {
   const [boardState, setBoardState] = useState({});
   const [players, setPlayers] = useState([]);
+  const [drawingMode, setDrawingMode] = useState(true);
+
+  const [paitingURL, setPaitingURL] = useState("");
 
   const { userID, code } = JSON.parse(localStorage.getItem("user"));
 
@@ -37,13 +32,16 @@ function Play() {
 
       switch (update.type) {
         case "update":
-          setPlayers(update.players);
           const blob = new Blob([update.board?.buffer], { type: "image/png" });
-          const boardURL = URL.createObjectURL(blob);
 
+          setPlayers(update.players);
+          setDrawingMode(update.drawingMode);
+          setPaitingURL(URL.createObjectURL(blob));
+
+          console.log(update);
           break;
         default:
-          console.log(`unknown update type ${update.type}`);
+          console.log(`unknown update type: ${update.type}`);
       }
     })();
   }, [lastMessage]);
@@ -55,11 +53,13 @@ function Play() {
   return (
     <div className="game">
       <div className="game__players">
-        {players.map((player, i) => (
-          <Player points={player.points} nick={player.nick} key={i} />
-        ))}
+        <PlayersList players={players} />
       </div>
-      <Board send={sendMessage} />
+      <Board
+        send={sendMessage}
+        drawingMode={drawingMode}
+        paitingURL={drawingMode ? "" : paitingURL}
+      />
       <div className="game__chat"></div>
     </div>
   );

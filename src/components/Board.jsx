@@ -42,17 +42,16 @@ const updateBoard = async (e, send, ctx) => {
   send(bsonData);
 };
 
-function Board({ send }) {
+function Board({ send, drawingMode, paitingURL }) {
   const mouseDownRef = useRef(false);
   const boardRef = useRef();
   const ctxRef = useRef();
 
   useEffect(() => {
     ctxRef.current = boardRef.current?.getContext("2d");
-    ctxRef.current.strokeStyle = "red";
   }, []);
 
-  return (
+  const board = (
     <canvas
       width="700"
       height="500"
@@ -68,5 +67,14 @@ function Board({ send }) {
       ref={boardRef}
     ></canvas>
   );
+
+  const display = (
+    <div
+      className="game__screen"
+      style={{ backgroundImage: `URL("${paitingURL}")` }}
+    ></div>
+  );
+
+  return drawingMode ? board : display;
 }
 export default Board;
