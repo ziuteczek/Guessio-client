@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { deserialize } from "bson";
+
 import useWebSocket from "react-use-websocket";
 import Board from "../components/Board";
+
+const Buffer = require("buffer/").Buffer;
 
 export default Play;
 function Player({ nick, points, avatarPath }) {
@@ -27,30 +31,26 @@ function Play() {
       return;
     }
 
-    const update = JSON.parse(lastMessage.data);
+    (async () => {
+      const updateBuff = await lastMessage.data.arrayBuffer();
+      const update = deserialize(updateBuff);
 
-    switch (update.type) {
-      case "update":
-        setPlayers(update.players);
-        const blob = new Blob([update.board], { type: "image/jpeg" });
-        document.body.style.backgroundImage = `URL(${URL.createObjectURL(
-          blob
-        )})`;
-        break;
-      default:
-        console.log("vamos a la plaja");
-    }
+      switch (update.type) {
+        case "update":
+          setPlayers(update.players);
+          const blob = new Blob([update.board?.buffer], { type: "image/png" });
+          const boardURL = URL.createObjectURL(blob);
+
+          break;
+        default:
+          console.log(`unknown update type ${update.type}`);
+      }
+    })();
   }, [lastMessage]);
 
   useEffect(() => {
     console.log(readyState);
   }, [readyState]);
-  // useEffect(() => {
-  //   if (lastMessage === null) {
-  //     return;
-  //   }
-  //   setBoardState(lastMessage);
-  // }, [lastMessage]);
 
   return (
     <div className="game">

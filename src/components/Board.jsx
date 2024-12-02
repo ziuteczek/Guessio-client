@@ -1,9 +1,13 @@
 import { useEffect, useRef } from "react";
+import { serialize } from "bson";
+
+const Buffer = require("buffer/").Buffer;
 
 const getBoardBlob = async (board) => {
   const blobBoardPromise = new Promise((resolve) => {
-    board.toBlob((blob) => resolve(blob), "image/jpeg");
+    board.toBlob((blob) => resolve(blob), "image/png");
   });
+
   return await blobBoardPromise;
 };
 
@@ -27,14 +31,15 @@ const updateBoard = async (e, send, ctx) => {
   ctx.stroke();
 
   const boardBlob = await getBoardBlob(board);
+  const boardBuff = await boardBlob.arrayBuffer();
 
-  const boardDataObj = {
+  const bsonData = serialize({
     type: "update",
     time: new Date().getTime(),
-    boardBlob: await boardBlob.text(),
-  };
+    boardBlob: Buffer.from(boardBuff),
+  });
 
-  send(JSON.stringify(boardDataObj));
+  send(bsonData);
 };
 
 function Board({ send }) {
@@ -44,6 +49,7 @@ function Board({ send }) {
 
   useEffect(() => {
     ctxRef.current = boardRef.current?.getContext("2d");
+    ctxRef.current.strokeStyle = "red";
   }, []);
 
   return (
