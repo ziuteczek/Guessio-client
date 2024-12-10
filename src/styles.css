@@ -116,6 +116,7 @@ main {
   border: 3px solid black;
   width: 700px;
   height: 500px;
+  transition: 0.0001s background-image;
 }
 .game__chat {
   overflow-y: scroll;
