@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { serialize } from "bson";
 
 const Buffer = require("buffer/").Buffer;
@@ -42,14 +42,18 @@ const updateBoard = async (e, send, ctx) => {
   send(bsonData);
 };
 
-function Board({ send, drawingMode, paitingURL }) {
+function Board({ send, drawingMode, paintingURL }) {
   const mouseDownRef = useRef(false);
   const boardRef = useRef();
   const ctxRef = useRef();
 
   useEffect(() => {
-    ctxRef.current = boardRef.current?.getContext("2d");
-  }, []);
+    if (drawingMode) {
+      ctxRef.current = boardRef.current?.getContext("2d");
+    }
+  }, [drawingMode]);
+
+  console.log(paintingURL);
 
   const board = (
     <canvas
@@ -71,7 +75,7 @@ function Board({ send, drawingMode, paitingURL }) {
   const display = (
     <div
       className="game__screen"
-      style={{ backgroundImage: `URL("${paitingURL}")` }}
+      style={{ backgroundImage: `url("${paintingURL}")` }}
     ></div>
   );
 

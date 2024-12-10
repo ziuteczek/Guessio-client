@@ -6,6 +6,8 @@ import router from "./router";
 
 import "./styles.css";
 
+const a = 5;
+
 const root = ReactDOM.createRoot(document.getElementById("game"));
 root.render(
   <React.StrictMode>
