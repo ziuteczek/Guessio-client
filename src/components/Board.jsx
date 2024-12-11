@@ -53,8 +53,6 @@ function Board({ send, drawingMode, paintingURL }) {
     }
   }, [drawingMode]);
 
-  console.log(paintingURL);
-
   const board = (
     <canvas
       width="700"

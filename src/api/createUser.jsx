@@ -4,7 +4,7 @@ const createUser = async (nick, code) => {
     const nickComputed = nick.trim().replaceAll(" ", "+");
 
     const response = await fetch(
-      `http://localhost:4000/create-user?nick=${nickComputed}&code=${code}`,
+      `${process.env.REACT_APP_SERVER}/create-user?nick=${nickComputed}&code=${code}`,
       {
         method: "POST",
       }

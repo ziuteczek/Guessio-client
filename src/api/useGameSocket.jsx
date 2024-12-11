@@ -4,7 +4,7 @@ import useWebSocket from "react-use-websocket";
 
 function useGameSocket(userID, code) {
   const { sendMessage, lastMessage, readyState } = useWebSocket(
-    `http://localhost:4000/enter-game?userid=${userID}&code=${code}`
+    `${process.env.REACT_APP_SERVER}/enter-game?userid=${userID}&code=${code}`
   );
 
   const [gameState, setGameState] = useState({});
@@ -18,6 +18,8 @@ function useGameSocket(userID, code) {
       const update = deserialize(await lastMessage.data.arrayBuffer());
 
       const painting = new Blob([update.board?.buffer], { type: "image/png" });
+
+      console.log(update);
 
       setGameState((gameState) => ({
         ...gameState,
