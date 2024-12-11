@@ -1,7 +1,7 @@
 // Creates game and returns game admin userID
-const createGame = async () => {
+const createGame = async (nick) => {
   try {
-    const response = await fetch(`http://localhost:4000/create-game`, {
+    const response = await fetch(`http://localhost:4000/create-game?nick=${nick}`, {
       method: "POST",
     });
 

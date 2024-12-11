@@ -1,23 +1,11 @@
 import { Link } from "react-router-dom";
 import createGame from "../api/createGame";
 
-function LinkBtn({ text, link, create }) {
-  const createAdmin = async () => {
-    const { userID, status, code } = await createGame();
-
-    if (status !== "succes" || !userID) {
-      return;
-    }
-
-    localStorage.setItem("user", JSON.stringify({ userID, code }));
-  };
+function LinkBtn({ text, create }) {
+  const link = `/join/${create ? "create" : "join"}`;
 
   return (
-    <Link
-      to={link}
-      className="play-btns__btn"
-      onClick={() => create && createAdmin()}
-    >
+    <Link to={link} className="play-btns__btn">
       {text}
       <div className="play-btns__btn-bg"></div>
       <div className="play-btns__btn-bg"></div>

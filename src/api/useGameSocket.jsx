@@ -25,7 +25,6 @@ function useGameSocket(userID, code) {
         drawingMode: update.drawingMode,
         paintingURL: URL.createObjectURL(painting),
       }));
-      console.log(gameState);
     })();
   }, [lastMessage]);
 
