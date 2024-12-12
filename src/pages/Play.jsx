@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from "react";
-
 import Board from "../components/Board";
 import PlayersList from "../components/PlayersList";
 import useGameSocket from "../api/useGameSocket";
@@ -21,7 +19,7 @@ function Play() {
       <Board
         send={send}
         drawingMode={drawingMode}
-        paintingURL={drawingMode ? "" : paintingURL}
+        paintingURL={paintingURL}
       />
       <div className="game__chat"></div>
     </div>

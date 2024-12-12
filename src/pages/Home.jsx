@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import createGame from "../api/createGame";
 
 function LinkBtn({ text, create }) {
   const link = `/join/${create ? "create" : "join"}`;
