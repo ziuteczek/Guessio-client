@@ -19,11 +19,10 @@ function useGameSocket(userID, code) {
 
       const painting = new Blob([update.board?.buffer], { type: "image/png" });
 
-      console.log(update);
-
       setGameState((gameState) => ({
         ...gameState,
         players: update.players,
+        messages: update.chat,
         drawingMode: update.drawingMode,
         paintingURL: URL.createObjectURL(painting),
       }));
@@ -33,6 +32,10 @@ function useGameSocket(userID, code) {
   useEffect(() => {
     console.log(readyState);
   }, [readyState]);
+
+  useEffect(() => {
+    console.log(gameState);
+  }, [gameState]);
 
   return { send: sendMessage, ...gameState };
 }

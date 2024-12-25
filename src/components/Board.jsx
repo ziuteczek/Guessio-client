@@ -34,7 +34,7 @@ const updateBoard = async (e, send, ctx) => {
   const boardBuff = await boardBlob.arrayBuffer();
 
   const bsonData = serialize({
-    type: "update",
+    type: "board update",
     time: new Date().getTime(),
     boardBlob: Buffer.from(boardBuff),
   });
@@ -75,9 +75,7 @@ function Board({ send, drawingMode, paintingURL }) {
           })();
       }}
       onMouseUp={() => (mouseDownRef.current = false)}
-      onMouseMove={(e) =>
-        mouseDownRef.current && updateBoard(e, send, ctxRef.current)
-      }
+      onMouseMove={(e) => mouseDownRef.current && updateBoard(e, send, ctxRef.current)}
       ref={boardRef}
     ></canvas>
   );

@@ -166,3 +166,13 @@ main {
   grid-row: 2;
   font-size: 4rem;
 }
+
+.chat__message:focus {
+  outline: none;
+}
+
+.chat__message {
+  text-decoration: none;
+  resize: none;
+  overflow-y: none;
+}
