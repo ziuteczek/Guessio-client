@@ -12,10 +12,10 @@ function Player({ nick, points, avatarPath }) {
 
 function PlayersList({ players = [] }) {
   return (
-    <>
+    <div className="game__players">
       {players.map((player, i) => (
         <Player nick={player.nick} points={player.points} key={i} />
       ))}
-    </>
+    </div>
   );
 }

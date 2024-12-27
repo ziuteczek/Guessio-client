@@ -17,13 +17,17 @@ function useGameSocket(userID, code) {
     (async () => {
       const update = deserialize(await lastMessage.data.arrayBuffer());
 
+      console.log(update);
+
       const painting = new Blob([update.board?.buffer], { type: "image/png" });
 
       setGameState((gameState) => ({
         ...gameState,
         players: update.players,
         messages: update.chat,
-        drawingMode: update.drawingMode,
+        drawingMode: update.allowDrawing,
+        roundEnd: update.round.endDate,
+        isAdmin: update.isAdmin,
         paintingURL: URL.createObjectURL(painting),
       }));
     })();

@@ -24,8 +24,10 @@ function Chat({ send, messages = [] }) {
   return (
     <div className="game__chat">
       <div className="chat__logs">
-        {messages.map((msg) => (
-          <p>{msg.author}: {msg.content}</p>
+        {messages.map((msg, i) => (
+          <p key={msg.time}>
+            {msg.author}: {msg.content}
+          </p>
         ))}
       </div>
       <form onSubmit={(e) => sendMessage(e)}>

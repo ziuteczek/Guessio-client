@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/join/:joinType",
+    path: "/enter/:joinType",
     element: <Join />,
   },
   {

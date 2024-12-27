@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 function LinkBtn({ text, create }) {
-  const link = `/join/${create ? "create" : "join"}`;
+  const link = `/enter/${create ? "create" : "join"}`;
 
   return (
     <Link to={link} className="play-btns__btn">
