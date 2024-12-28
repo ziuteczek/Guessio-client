@@ -13,8 +13,6 @@ function Timer({ timerStop }) {
     return () => clearInterval(clockInterval);
   }, [timerStop]);
 
-  console.log(timerStop);
-
   return (
     <div className="timer">
       <p className="timer__seconds">{clock}</p>

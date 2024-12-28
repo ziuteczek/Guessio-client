@@ -58,18 +58,18 @@ main {
   transform: translateY(0);
 }
 .play-btns__btn-bg:nth-child(1) {
-  background-image: url("wave-btn/wave-btn-1.svg");
+  background-image: url("img/wave-btn/wave-btn-1.svg");
 }
 .play-btns__btn-bg:nth-child(2) {
-  background-image: url("wave-btn/wave-btn-2.svg");
+  background-image: url("img/wave-btn/wave-btn-2.svg");
   transition-delay: 0.1s;
 }
 .play-btns__btn-bg:nth-child(3) {
-  background-image: url("wave-btn/wave-btn-3.svg");
+  background-image: url("img/wave-btn/wave-btn-3.svg");
   transition-delay: 0.2s;
 }
 .play-btns__btn-bg:nth-child(4) {
-  background-image: url("wave-btn/wave-btn-4.svg");
+  background-image: url("img/wave-btn/wave-btn-4.svg");
   transition-delay: 0.3s;
 }
 .play-btns__container {

@@ -27,6 +27,7 @@ function useGameSocket(userID, code) {
         messages: update.chat,
         drawingMode: update.allowDrawing,
         roundEnd: update.round.endDate,
+        phase: update.round.type,
         isAdmin: update.isAdmin,
         paintingURL: URL.createObjectURL(painting),
       }));
