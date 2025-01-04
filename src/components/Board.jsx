@@ -66,7 +66,7 @@ function Board({ send, drawingMode, paintingURL }) {
     <canvas
       width="700"
       height="500"
-      className="game__screen"
+      className="board"
       onMouseDown={(e) => {
         drawingMode &&
           (() => {

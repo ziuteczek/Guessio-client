@@ -17,20 +17,43 @@ function useGameSocket(userID, code) {
     (async () => {
       const update = deserialize(await lastMessage.data.arrayBuffer());
 
-      console.log(update);
+      switch (update.type) {
+        case "full":
+          setGameState((oldGameState) => ({
+            ...oldGameState,
+            players: update.players,
+            messages: update.chat,
+            drawingMode: update.allowDrawing,
+            roundEnd: update.round.endDate,
+            phase: update.round.type,
+            isAdmin: update.isAdmin,
+            categories: update.categories,
+          }));
+        // eslint-disable-next-line no-fallthrough
+        case "board":
+          const painting = new Blob([update.board?.buffer], { type: "image/png" });
 
-      const painting = new Blob([update.board?.buffer], { type: "image/png" });
-
-      setGameState((gameState) => ({
-        ...gameState,
-        players: update.players,
-        messages: update.chat,
-        drawingMode: update.allowDrawing,
-        roundEnd: update.round.endDate,
-        phase: update.round.type,
-        isAdmin: update.isAdmin,
-        paintingURL: URL.createObjectURL(painting),
-      }));
+          setGameState((oldGameState) => ({
+            ...oldGameState,
+            paintingURL: URL.createObjectURL(painting),
+          }));
+          break;
+        case "new message":
+          console.log(update);
+          setGameState((oldGameState) => ({
+            ...oldGameState,
+            messages: [...oldGameState.messages, update.message],
+          }));
+          break;
+        case "player list":
+          setGameState((oldGameState) => ({
+            ...oldGameState,
+            players: update.players,
+          }));
+          break;
+        default:
+          console.log(`Undefined update type: ${update.type}`);
+      }
     })();
   }, [lastMessage]);
 

@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -112,12 +114,11 @@ main {
   height: 100%;
   width: 100%;
 }
-.game__screen {
+.board {
   border: 3px solid black;
   width: 700px;
   cursor: crosshair;
   height: 500px;
-  transition: 0.0001s background-image;
 }
 .game__chat {
   overflow-y: scroll;
@@ -126,7 +127,7 @@ main {
   width: 300px;
   height: 500px;
 }
-.game__players {
+.players-list {
   overflow-y: scroll;
   margin-right: 4em;
   border: 3px solid black;
@@ -176,4 +177,78 @@ main {
   text-decoration: none;
   resize: none;
   overflow-y: none;
+}
+.settings {
+  position: relative;
+  width: var(--settings-width);
+  height: var(--settings-height);
+  left: calc(50% - var(--settings-width) / 2);
+  top: calc(50% - var(--settings-height) / 2);
+  --settings-width: 800px;
+  --settings-height: 600px;
+}
+/* .settings[open] {
+  display: flex;
+} */
+.settings__exit {
+  right: 20px;
+  display: block;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 5rem;
+  color: red;
+  position: absolute;
+  padding: 10px;
+}
+
+.settings__select-section-buttons-container {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  justify-content: space-evenly;
+  padding-top: 2em;
+}
+.settings__select-section-button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  font-size: 2.5rem;
+  font-family: inherit;
+}
+.settings__select-section-button--current {
+  text-decoration: underline;
+}
+.settings__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings__form #rounds_quantity::-webkit-outer-spin-button,
+.settings__form #rounds_quantity::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.settings__form #rounds_quantity {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.settings__category-label {
+  cursor: pointer;
+  border: 3px solid black;
+  padding: 10px;
+  flex-grow: 1;
+  user-select: none;
+  -webkit-user-select: none;
+  text-align: center;
+}
+.settings__category-checkbox {
+  display: none;
+}
+.settings__form--categories {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.settings__category-checkbox:checked + .settings__category-label {
+  background-color: red;
 }
