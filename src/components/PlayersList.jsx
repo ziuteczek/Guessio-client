@@ -14,7 +14,7 @@ function PlayersList({ players = [] }) {
   return (
     <div className="players-list">
       {players.map((player, i) => (
-        <Player nick={player.nick} points={player.points} key={i} />
+        <Player nick={player.nick} points={player.points} key={player.nick} />
       ))}
     </div>
   );

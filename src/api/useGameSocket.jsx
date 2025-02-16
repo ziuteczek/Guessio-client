@@ -28,6 +28,7 @@ function useGameSocket(userID, code) {
             phase: update.round.type,
             isAdmin: update.isAdmin,
             categories: update.categories,
+            settings: update.settings,
           }));
         // eslint-disable-next-line no-fallthrough
         case "board":
